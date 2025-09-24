@@ -1,4 +1,4 @@
-# study
+# studyProject
 
 ## Project setup
 ```
