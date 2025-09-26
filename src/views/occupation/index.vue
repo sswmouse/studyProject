@@ -1,10 +1,18 @@
 <template>
     <div class="table-container">
+        <search-card
+            v-model="searchForm"
+            :config="searchConfig"
+            @search="onSearch"
+            @reset="onReset"
+        />
         <el-button
             type="primary"
-            @click="handleAdd"
             style="margin-bottom: 20px;"
-        >新增</el-button>
+            @click="handleAdd"
+        >
+            新增
+        </el-button>
         <el-table
             :data="tableData"
             border
@@ -32,12 +40,16 @@
                     <el-button
                         size="small"
                         @click="handleEdit(scope.$index, scope.row)"
-                    >编辑</el-button>
+                    >
+                        编辑
+                    </el-button>
                     <el-button
                         size="small"
                         type="danger"
                         @click="handleDelete(scope.$index, scope.row)"
-                    >删除</el-button>
+                    >
+                        删除
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -76,9 +88,12 @@
 </template>
 
 <script>
+import { searchConfig } from './config';
 export default {
     data() {
         return {
+            searchConfig,
+            searchForm: {},
             tableData: [
                 {
                     name: '张三',
@@ -99,24 +114,24 @@ export default {
                 address: ''
             },
             currentIndex: -1
-        }
+        };
     },
     methods: {
         handleAdd() {
-            this.dialogTitle = '新增数据'
+            this.dialogTitle = '新增数据';
             this.form = {
                 name: '',
                 age: '',
                 address: ''
-            }
-            this.currentIndex = -1
-            this.dialogVisible = true
+            };
+            this.currentIndex = -1;
+            this.dialogVisible = true;
         },
         handleEdit(index, row) {
-            this.dialogTitle = '编辑数据'
-            this.form = JSON.parse(JSON.stringify(row))
-            this.currentIndex = index
-            this.dialogVisible = true
+            this.dialogTitle = '编辑数据';
+            this.form = JSON.parse(JSON.stringify(row));
+            this.currentIndex = index;
+            this.dialogVisible = true;
         },
         handleDelete(index) {
             this.$confirm('确认删除该记录吗?', '提示', {
@@ -124,34 +139,42 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                this.tableData.splice(index, 1)
+                this.tableData.splice(index, 1);
                 this.$message({
                     type: 'success',
                     message: '删除成功!'
-                })
+                });
             }).catch(() => {
                 this.$message({
                     type: 'info',
                     message: '已取消删除'
-                })
-            })
+                });
+            });
         },
         handleSubmit() {
             if (this.currentIndex >= 0) {
                 // 编辑操作
-                this.tableData.splice(this.currentIndex, 1, JSON.parse(JSON.stringify(this.form)))
+                this.tableData.splice(this.currentIndex, 1, JSON.parse(JSON.stringify(this.form)));
             } else {
                 // 新增操作
-                this.tableData.push(JSON.parse(JSON.stringify(this.form)))
+                this.tableData.push(JSON.parse(JSON.stringify(this.form)));
             }
-            this.dialogVisible = false
+            this.dialogVisible = false;
             this.$message({
                 type: 'success',
                 message: '操作成功!'
-            })
+            });
+        },
+        onSearch(form) {
+            console.log('搜索条件:', form);
+            // 这里可以添加实际的搜索逻辑
+        },
+        onReset() {
+            console.log('搜索条件已重置');
+            // 这里可以添加实际的重置逻辑
         }
     }
-}
+};
 </script>
 
 <style scoped>

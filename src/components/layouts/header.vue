@@ -48,51 +48,60 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 60px;
     padding: 0 20px;
-    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
+    /* 渐变背景 */
+    background: linear-gradient(90deg, #0b1e42 0%, #4b0f7f 60%, #d4af37 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    color: #fff;
 
-.left-section {
-    display: flex;
-    align-items: center;
-}
+    .left-section {
+        display: flex;
+        align-items: center;
 
-.logo {
-    height: 36px;
-    margin-right: 10px;
-}
+        .logo {
+            height: 36px;
+            margin-right: 10px;
+        }
 
-.platform-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
+        .platform-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff; // 渐变背景下用白色文字更清晰
+        }
+    }
 
-.right-section {
-    display: flex;
-    align-items: center;
-}
+    .right-section {
+        display: flex;
+        align-items: center;
 
-.user-info {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
+        .user-info {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
 
-.avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    margin-right: 8px;
-}
+            .avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                margin-right: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.3); // 渐变背景下加边框更美观
+            }
 
-.username {
-    margin-right: 5px;
+            .username {
+                margin-right: 5px;
+                color: #fff; // 渐变背景下用白色文字
+            }
+
+            i {
+                color: #fff;
+            }
+        }
+    }
 }
 </style>

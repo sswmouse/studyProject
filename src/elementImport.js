@@ -46,7 +46,10 @@ import {
     Container,
     Header,
     Aside,
-    Main
+    Main,
+    Row,
+    Col,
+    InputNumber
 } from 'element-ui';
 
 const elementList = [
@@ -93,7 +96,10 @@ const elementList = [
     Container,
     Header,
     Aside,
-    Main
+    Main,
+    Row,
+    Col,
+    InputNumber
 ];
 
 elementList.forEach(item => {

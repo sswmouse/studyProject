@@ -10,8 +10,8 @@
             <template v-for="item in filteredMenu">
                 <el-submenu
                     v-if="showType(item)"
-                    :index="item.path"
                     :key="item.name"
+                    :index="item.path"
                 >
                     <template #title>
                         <i :class="item.icon"></i>
@@ -19,8 +19,8 @@
                     </template>
                     <el-menu-item
                         v-for="child in item.children"
-                        active
                         :key="child.name"
+                        active
                         :index="child.path"
                     >
                         {{ child?.label || '' }}
@@ -28,8 +28,8 @@
                 </el-submenu>
                 <el-menu-item
                     v-else
-                    :index="item.path"
                     :key="item.id"
+                    :index="item.path"
                 >
                     <i :class="item.icon"></i>
                     {{ showLabel(item) }}
@@ -123,10 +123,89 @@ export default {
 <style lang="less" scoped>
 .sidebar {
     width: 250px;
-    height: calc(100vh - 62x);
+    height: calc(100vh - 62px);
     position: absolute;
     left: 0;
     top: 60px;
-    border-top: 2px solid #F1F2F5;
+    background: linear-gradient(to bottom, #0b1e42 0%, #4b0f7f 100%);
+    border-top: 2px solid #d4af37;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+
+    .el-menu-vertical-demo {
+        background: transparent;
+        border-right: none;
+        color: #ffd700;
+
+        // 一级菜单（无子菜单）
+        >.el-menu-item {
+            color: #ffd700;
+            font-weight: 500;
+            transition: all 0.3s;
+
+            i {
+                margin-right: 8px;
+            }
+
+            &:hover {
+                background: rgba(255, 215, 0, 0.1);
+                box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
+            }
+
+            &.is-active {
+                background: rgba(255, 215, 0, 0.25);
+                color: #fff;
+                box-shadow: inset 0 0 12px rgba(255, 215, 0, 0.5);
+                font-weight: bold;
+            }
+        }
+
+        // 一级菜单（包含子菜单）
+        >.el-submenu {
+            .el-submenu__title {
+                color: #ffd700;
+                font-weight: 500;
+                transition: all 0.3s;
+
+                i {
+                    margin-right: 8px;
+                }
+
+                &:hover {
+                    background: rgba(255, 215, 0, 0.1);
+                    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
+                }
+            }
+
+            &.is-active>.el-submenu__title {
+                background: rgba(255, 215, 0, 0.25);
+                color: #fff;
+                box-shadow: inset 0 0 12px rgba(255, 215, 0, 0.5);
+                font-weight: bold;
+            }
+
+            // 子菜单
+            .el-submenu__children {
+                background: rgba(0, 0, 0, 0.1);
+
+                .el-menu-item {
+                    color: #ffe680;
+                    padding-left: 40px; // 缩进显示层级
+
+                    &:hover {
+                        background: rgba(255, 215, 0, 0.15);
+                        box-shadow: inset 0 0 8px rgba(255, 215, 0, 0.3);
+                    }
+
+                    &.is-active {
+                        background: rgba(255, 215, 0, 0.25);
+                        color: #fff;
+                        box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.5);
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
 }
 </style>

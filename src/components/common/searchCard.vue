@@ -1,15 +1,7 @@
-<!--
- * @Author: yerun sswmouse@163.com
- * @Date: 2025-09-25 18:01:10
- * @LastEditors: yerun sswmouse@163.com
- * @LastEditTime: 2025-09-26 14:42:49
- * @FilePath: /studyProject/baidu/src/components/common/searchCard.vue
- * @Description: 搜索组件
--->
 <template>
     <div class="search-component">
         <el-form
-            :model="form"
+            :model="innerValue"
             label-width="100px"
         >
             <el-row :gutter="20">
@@ -17,24 +9,25 @@
                     v-for="(item, index) in config"
                     :key="index"
                     :span="item.span || 8"
+                    class="form-col"
                 >
                     <el-form-item :label="item.label">
-                        <!-- 输入框类型 -->
+                        <!-- 输入框 -->
                         <el-input
                             v-if="item.type === 'input'"
-                            v-model="form[item.engName]"
-                            :placeholder="item.placeholder || '请输入'"
-                            :maxlength="item.maxlength"
-                            :minlength="item.minlength"
+                            v-model="innerValue[item.engName]"
+                            placeholder="请输入"
                             clearable
+                            class="full-width"
                         />
 
-                        <!-- 选择器类型 -->
+                        <!-- 选择器 -->
                         <el-select
                             v-else-if="item.type === 'select'"
-                            v-model="form[item.engName]"
-                            :placeholder="item.placeholder || '请选择'"
+                            v-model="innerValue[item.engName]"
+                            placeholder="请选择"
                             clearable
+                            class="full-width"
                         >
                             <el-option
                                 v-for="option in item.options"
@@ -44,36 +37,45 @@
                             />
                         </el-select>
 
-                        <!-- 日期选择器类型 -->
+                        <!-- 日期选择器 -->
                         <el-date-picker
                             v-else-if="item.type === 'date'"
-                            v-model="form[item.engName]"
+                            v-model="innerValue[item.engName]"
                             :type="item.dateType || 'date'"
-                            :placeholder="item.placeholder || '请选择日期'"
+                            placeholder="请选择日期"
                             clearable
+                            class="full-width"
                         />
 
-                        <!-- 数字输入框类型 -->
+                        <!-- 数字输入框 -->
                         <el-input-number
                             v-else-if="item.type === 'number'"
-                            v-model="form[item.engName]"
+                            v-model="innerValue[item.engName]"
                             :min="item.min"
                             :max="item.max"
-                            :placeholder="item.placeholder || '请输入数字'"
+                            placeholder="请输入数字"
                             clearable
+                            class="full-width"
                         />
                     </el-form-item>
                 </el-col>
 
+                <!-- 操作按钮 -->
                 <el-col
                     :span="24"
-                    style="text-align: right"
+                    class="actions-col"
                 >
-                    <el-button
-                        type="primary"
-                        @click="handleSearch"
-                    >搜索</el-button>
-                    <el-button @click="handleReset">重置</el-button>
+                    <slot name="actions">
+                        <el-button
+                            type="primary"
+                            @click="handleSearch"
+                        >
+                            搜索
+                        </el-button>
+                        <el-button @click="handleReset">
+                            重置
+                        </el-button>
+                    </slot>
                 </el-col>
             </el-row>
         </el-form>
@@ -84,38 +86,64 @@
 export default {
     name: 'SearchComponent',
     props: {
-        form: {
+        value: {
             type: Object,
             required: true
         },
         config: {
             type: Array,
             required: true,
-            validator: (value) => {
-                return value.every(
-                    (item) =>
-                        item.type &&
-                        item.engName &&
-                        item.label
-                )
-            }
+            validator: (arr) =>
+                arr.every((item) => item.type && item.engName && item.label)
+        }
+    },
+    data() {
+        return {
+            innerValue: { ...this.value } // 拷贝一份内部使用
+        };
+    },
+    watch: {
+        value: {
+            handler(newVal) {
+                this.innerValue = { ...newVal }; // 父组件更新时同步
+            },
+            deep: true
         }
     },
     methods: {
         handleSearch() {
-            this.$emit('search', this.form)
+            this.$emit('input', { ...this.innerValue }); // 同步父组件 v-model
+            this.$emit('search', { ...this.innerValue });
         },
         handleReset() {
-            this.$emit('reset')
+            const resetForm = {};
+            Object.keys(this.innerValue).forEach((key) => (resetForm[key] = ''));
+            this.innerValue = resetForm;
+            this.$emit('input', { ...resetForm });
+            this.$emit('reset');
         }
     }
-}
+};
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .search-component {
-    padding: 20px;
+    padding: 20px 40px 20px 0px;
     border-radius: 4px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+    .form-col {
+        .full-width {
+            width: 100%;
+        }
+    }
+
+    .actions-col {
+        text-align: right;
+        margin-top: 10px;
+
+        ::v-deep .el-button+.el-button {
+            margin-left: 10px;
+        }
+    }
 }
 </style>

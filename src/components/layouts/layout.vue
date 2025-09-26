@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { KeepAlive } from 'vue';
 import Header from './header.vue';
 import Sidebar from './sidebar.vue';
 
@@ -85,7 +84,6 @@ export default {
         .layout-content {
             flex: 1;
             margin: 20px;
-            padding: 20px;
             background: #ffffff;
             overflow: auto;
         }
