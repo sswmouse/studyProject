@@ -9,7 +9,7 @@
         >
             <template v-for="item in filteredMenu">
                 <el-submenu
-                    v-if="item.children && item.children.length > 0"
+                    v-if="showType(item)"
                     :index="item.path"
                     :key="item.name"
                 >
@@ -31,7 +31,8 @@
                     :index="item.path"
                     :key="item.id"
                 >
-                    {{ item.title }}
+                    <i :class="item.icon"></i>
+                    {{ showLabel(item) }}
                 </el-menu-item>
             </template>
         </el-menu>
@@ -90,19 +91,42 @@ export default {
                     }
                 })
                 .filter(route => route !== null); // 去掉不显示的路由
-        }
+        },
+        /**
+         * @description: 是否显示一二级菜单模式
+         * @return {*}
+         */
+        showType(item) {
+            if (!item.children || item.children.length === 0) {
+                return false;
+            } else if (item.isGrade && item.children.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        /**
+         * @description: 仅存在一级菜单或子菜单数量为1时显示标签
+         * @return {*}
+         */
+        showLabel(item) {
+            if (item.children && item.children.length === 1) {
+                return item.children[0]?.label || '';
+            } else {
+                return item?.label || '';
+            }
+        },
     },
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .sidebar {
     width: 250px;
-    height: calc(100vh - 61x);
+    height: calc(100vh - 62x);
     position: absolute;
     left: 0;
     top: 60px;
-    background-color: #FFFFFF;
-    border-top: 1px solid #F1F2F5;
+    border-top: 2px solid #F1F2F5;
 }
 </style>

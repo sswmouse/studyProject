@@ -2,7 +2,7 @@
  * @Author: yerun sswmouse@163.com
  * @Date: 2025-09-25 18:01:10
  * @LastEditors: yerun sswmouse@163.com
- * @LastEditTime: 2025-09-25 18:07:03
+ * @LastEditTime: 2025-09-26 14:42:49
  * @FilePath: /studyProject/baidu/src/components/common/searchCard.vue
  * @Description: 搜索组件
 -->
@@ -115,7 +115,6 @@ export default {
 <style scoped>
 .search-component {
     padding: 20px;
-    background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }

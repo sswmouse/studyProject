@@ -42,7 +42,11 @@ import {
     Loading,
     MessageBox,
     Message,
-    Notification
+    Notification,
+    Container,
+    Header,
+    Aside,
+    Main
 } from 'element-ui';
 
 const elementList = [
@@ -85,7 +89,11 @@ const elementList = [
     Card,
     Carousel,
     CarouselItem,
-    Loading
+    Loading,
+    Container,
+    Header,
+    Aside,
+    Main
 ];
 
 elementList.forEach(item => {

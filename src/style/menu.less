@@ -1,0 +1,47 @@
+.el-menu {
+    background-color: transparent !important;
+
+    /* 一级菜单 */
+    .el-menu-item,
+    .el-sub-menu__title {
+        background-color: transparent !important;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+    }
+
+    /* 选中状态 */
+    .el-menu-item.is-active,
+    .el-sub-menu.is-active>.el-sub-menu__title {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* 二级菜单 */
+    .el-sub-menu .el-menu-item {
+        background-color: transparent !important;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+    }
+
+    /* 针对含二级菜单的一级菜单悬停闪白问题 */
+    .el-sub-menu:hover>.el-sub-menu__title {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* 去掉右侧箭头背景 */
+    .el-sub-menu__icon-arrow {
+        background-color: transparent !important;
+    }
+
+    .el-submenu__title:hover {
+        background-color: transparent !important;
+    }
+
+    .el-menu-vertical-demo {
+        border-right: none;
+        height: 100%;
+    }
+}
