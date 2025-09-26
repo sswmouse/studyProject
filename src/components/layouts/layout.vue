@@ -36,6 +36,7 @@ export default {
 .layout-container {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     height: 100vh;
 }
 
@@ -52,15 +53,14 @@ export default {
 }
 
 .layout-sidebar {
-    width: 220px;
-    background: #001529;
+    width: 250px;
     transition: width 0.2s;
 }
 
 .layout-content {
     flex: 1;
     padding: 20px;
-    overflow-y: auto;
+    overflow: auto;
     background: #f0f2f5;
 }
 </style>

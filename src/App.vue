@@ -2,7 +2,7 @@
  * @Author: yerun sswmouse@163.com
  * @Date: 2025-09-24 11:01:01
  * @LastEditors: yerun sswmouse@163.com
- * @LastEditTime: 2025-09-25 17:58:06
+ * @LastEditTime: 2025-09-26 10:37:53
  * @FilePath: /studyProject/baidu/src/App.vue
  * @Description: app
 -->
@@ -18,13 +18,6 @@ export default {
 };
 </script>
 
-<style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
+<style lang="less">
+@import './style/common.less';
 </style>

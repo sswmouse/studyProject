@@ -3,11 +3,11 @@
         <!-- 左侧：平台logo和名称 -->
         <div class="left-section">
             <img
-                src="@/assets/img/logo.png"
+                src="@/assets/img/DNF.png"
                 alt="平台Logo"
                 class="logo"
             />
-            <span class="platform-name">平台名称</span>
+            <span class="platform-name">数据蛋</span>
         </div>
 
         <!-- 右侧：用户信息 -->
@@ -15,7 +15,7 @@
             <el-dropdown>
                 <div class="user-info">
                     <img
-                        src="@/assets/avatar.png"
+                        src="@/assets/img/user.jpg"
                         alt="用户头像"
                         class="avatar"
                     >
@@ -23,7 +23,7 @@
                     <i class="el-icon-arrow-down"></i>
                 </div>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>权限名称</el-dropdown-item>
+                    <el-dropdown-item>平台管理员</el-dropdown-item>
                     <el-dropdown-item
                         divided
                         @click.native="handleLogout"

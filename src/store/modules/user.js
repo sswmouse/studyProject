@@ -5,7 +5,20 @@
  */
 
 const state = {
-    permissions: [] // 用户权限列表
+    permissions: [
+        {
+            pageName: 'homeIndex', // 页面名称（路由 name）
+            permission: [], // 页面权限列表,用于控制页面按钮权限等
+        },
+        {
+            pageName: 'classList', // 页面名称（路由 name）
+            permission: [], // 页面权限列表,用于控制页面按钮权限等
+        },
+        {
+            pageName: 'classAdd', // 页面名称（路由 name）
+            permission: [], // 页面权限列表,用于控制页面按钮权限等
+        },
+    ] // 用户权限列表
 };
 
 const mutations = {
